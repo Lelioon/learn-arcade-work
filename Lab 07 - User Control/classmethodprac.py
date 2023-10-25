@@ -151,45 +151,71 @@
 #         self.name = name
 #         self.health = health
 
-class Boat:
-    def __init__(self):
-        self.tonnage = 0
-        self.name = ""
-        self.is_docked = True
+# class Boat:
+#     def __init__(self):
+#         self.tonnage = 0
+#         self.name = ""
+#         self.is_docked = True
 
-    def dock(self):
-        if self.is_docked:
-            print(self.name, "is already docked")
-        else:
-            self.is_docked = True
-            print("Docking")
+#     def dock(self):
+#         if self.is_docked:
+#             print(self.name, "is already docked")
+#         else:
+#             self.is_docked = True
+#             print("Docking")
             
-    def undock(self):
-        if not self.is_docked:
-            print("You aren't docked")
-        else:
-            self.is_docked = False
-            print("Undocking")
+#     def undock(self):
+#         if not self.is_docked:
+#             print("You aren't docked")
+#         else:
+#             self.is_docked = False
+#             print("Undocking")
 
-class Submarine(Boat):
-    # def __init__(self):
-    #     self.is_submerged = True
+# class Submarine(Boat):
+#     # def __init__(self):
+#     #     self.is_submerged = True
 
-    def submerge(self):
+#     def submerge(self):
         
-        print("You are already submerged")
+#         print("You are already submerged")
         
-b = Boat()
-b.name = "SS Unsinkable"
-s = Submarine()
-s.name = "SS Always Sinkable"
+# b = Boat()
+# b.name = "SS Unsinkable"
+# s = Submarine()
+# s.name = "SS Always Sinkable"
 
-b.dock()
-b.undock()
-b.undock()
-b.dock()
-b.dock()
-s.submerge()
-s.dock()
+# b.dock()
+# b.undock()
+# b.undock()
+# b.dock()
+# b.dock()
+# s.submerge()
+# s.dock()
 
 
+# Example of an instance variable
+class ClassA():
+    def __init__(self):
+        self.y = 3
+
+# Example of a static variable
+class ClassB():
+    x = 7
+
+def main():
+    # Create class instances
+    a = ClassA()
+    b = ClassB()
+
+    # Two ways to print the static variable.
+    # The second way is the proper way to do it.
+    print(b.x)
+    print(ClassB.x)
+
+    # One way to print an instance variable.
+    # The second generates an error, because we don't know what instance
+    # to reference.
+    print(a.y)
+    print(ClassA.y)
+
+main()
