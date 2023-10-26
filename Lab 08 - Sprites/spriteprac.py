@@ -1,5 +1,6 @@
 import random
 import arcade
+import time
 
 # Constants
 SPRITE_SCALING_PLAYER = 0.5
@@ -8,6 +9,37 @@ COIN_COUNT = 50
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
+
+class Coin(arcade.Sprite):
+
+    def __init(self, filename, sprite_scaling):
+
+        super().__init__(filename, sprite_scaling)
+
+        self.change_x = 0
+        self.change_y = 0
+
+    #def reset_pos(self):
+        # self.center_y = random.randrange(SCREEN_HEIGHT + 20, SCREEN_HEIGHT + 100)
+        # self.center_x = random.randrange(SCREEN_WIDTH)
+        
+
+
+    def update(self):
+        self.center_x += self.change_x
+        self.center_y += self.change_y
+
+        if self.left < 0:
+            self.change_x *= -1
+        
+        if self.right > SCREEN_WIDTH:
+            self.change_x *= -1
+        
+        if self.bottom < 0:
+            self.change_y *= -1
+        
+        if self.top > SCREEN_HEIGHT:
+            self.change_y *= -1
 
 class MyGame(arcade.Window):
     def __init__(self):
@@ -35,10 +67,12 @@ class MyGame(arcade.Window):
         self.player_list.append(self.player_sprite)
 
         for i in range(COIN_COUNT):
-            coin = arcade.Sprite("coin_01.png", SPRITE_SCALING_COIN)
+            coin = Coin("coin_01.png", SPRITE_SCALING_COIN)
 
             coin.center_x = random.randrange(SCREEN_WIDTH)
             coin.center_y = random.randrange(SCREEN_HEIGHT)
+            coin.change_x = random.randrange(-3, 4)
+            coin.change_y = random.randrange(-3, 4)
 
             self.coin_list.append(coin)
 
@@ -54,6 +88,21 @@ class MyGame(arcade.Window):
     def on_mouse_motion(self, x, y, dx, dy):
         self.player_sprite.center_x = x
         self.player_sprite.center_y = y
+    
+    def update(self, delta_time):
+        self.coin_list.update()
+
+        hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.coin_list)
+
+        for coin in hit_list:
+            coin.remove_from_sprite_lists()
+            #coin.reset_pos()
+            self.score += 1
+            # if self.score == 50:
+            #     self.setup()
+        
+
+            
     
 def main():
     window = MyGame()
