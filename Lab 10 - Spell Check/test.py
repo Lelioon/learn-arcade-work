@@ -1,4 +1,6 @@
+import my_functions
+
 def main():
-    foo()
+    my_functions.foo()
 
 main()
