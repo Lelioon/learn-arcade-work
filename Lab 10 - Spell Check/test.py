@@ -1,0 +1,4 @@
+def main():
+    foo()
+
+main()
