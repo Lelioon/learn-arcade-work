@@ -9,23 +9,99 @@ class AdventureObject:
         # The number of the room that the object is in
         self.room = room
     
-    def check_if_one_item_in_room_v1(my_list, room):
-        """
-        Return True if at least one item has a property
-        """
 
-        i = 0
+def check_if_one_item_is_in_room_v1(self, my_list, room):
+    """
+    Return True if at least one item has a property
+    """
+    i = 0
+    while i < len(my_list) and my_list.room[i] != room:
+        i += 1
+    if i < len(my_list):
+        return True
+    else:
+        return False
 
-        while i > len(my_list) and my_list[i].room != room:
-            i += 1
-
-        if i < len(my_list):
-            # Found an item with the property
+def check_if_one_item_is_in_room_v2(my_list, room):
+    """
+    Return true if at least one item has a
+    property. Works the same as v1, but less code.
+    """
+    for item in my_list:
+        if item.room == room:
             return True
-        else:
-            # There is no item with the property
-            return False
-        
+    return False
+
+def check_if_one_item_has_property(self, item_list, room):
+    for item in item_list:
+        if item.room == room:
+            return True
+    return False
+
+def check_if_all_items_are_in_room(self, my_list, room):
+    for i in my_list:
+        if i.room != room:
+            return False # Breaks loop if there is no match
+    return True
+
+
+def get_items_in_room(my_list, room):
+    """
+    Build a brand new list that holds all the items that match our property
+    """
+
+    matching_list = []
+    for item in my_list:
+        if item.room == room:
+            matching_list.append(item)
+    return matching_list
+
+
+
+def check_if_one_item_in_room_v1(my_list, room):
+    """
+    Return True if at least one item has a property
+    """
+    for item in my_list:
+        if item.room == room:
+            return True # Return statement breaks and exits loop (and signals the end of the function)
+    
+    return False
+
+    # Longer version of the above for loop
+    # i = 0
+
+    # while i > len(my_list) and my_list[i].room != room:
+    #     i += 1
+
+    # if i < len(my_list):
+    #     # Found an item with the property
+    #     return True
+    # else:
+    #     # There is no item with the property
+    #     return False
+def main():
+    object_list = []
+    object_list.append(AdventureObject("Key", 5))
+    object_list.append(AdventureObject("Bear", 5))
+    object_list.append(AdventureObject("Food", 8))
+    object_list.append(AdventureObject("Sword", 2))
+    object_list.append(AdventureObject("Wand", 10))
+
+    result = check_if_one_item_is_in_room_v1(object_list, 5)
+    print("Result of test check_if_one_item_is_in_room_v1:", result)
+
+    result = check_if_one_item_is_in_room_v2(object_list, 5)
+    print("Result of test check_if_one_item_is_in_room_v2:", result)
+
+    result = check_if_all_items_are_in_room(object_list, 5)
+    print("Result of test check_if_all_items_are_in_room:", result)
+
+    result = get_items_in_room(object_list, 5)
+    print("Number of items returned from test get_items_in_room:", len(result))
+
+
+main()     
 
 
 # import random
