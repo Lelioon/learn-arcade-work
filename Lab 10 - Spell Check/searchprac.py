@@ -1,7 +1,7 @@
 class AdventureObject:
     """ Class that defines an object in a text adventure game """
 
-    def __init(self, description, room):
+    def __init__(self, description, room):
         """ Constructor"""
 
         # Description
@@ -10,12 +10,12 @@ class AdventureObject:
         self.room = room
     
 
-def check_if_one_item_is_in_room_v1(self, my_list, room):
+def check_if_one_item_is_in_room_v1(my_list, room):
     """
     Return True if at least one item has a property
     """
     i = 0
-    while i < len(my_list) and my_list.room[i] != room:
+    while i < len(my_list) and my_list[i].room != room:
         i += 1
     if i < len(my_list):
         return True
@@ -32,13 +32,13 @@ def check_if_one_item_is_in_room_v2(my_list, room):
             return True
     return False
 
-def check_if_one_item_has_property(self, item_list, room):
+def check_if_one_item_has_property(item_list, room):
     for item in item_list:
         if item.room == room:
             return True
     return False
 
-def check_if_all_items_are_in_room(self, my_list, room):
+def check_if_all_items_are_in_room(my_list, room):
     for i in my_list:
         if i.room != room:
             return False # Breaks loop if there is no match
