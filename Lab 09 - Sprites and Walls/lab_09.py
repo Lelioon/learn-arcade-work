@@ -37,10 +37,14 @@ class MyGame(arcade.Window):
         self.wall_list = None
         self.player_list = None
         self.coin_list = None
+        self.background_music  = None
 
         # Set up the player
         self.player_sprite = None
         self.physics_engine = None
+
+        self.score = 0
+        self.coin_sound = None
 
     def setup(self):
         """ Set up the game and initialize the variables. """
@@ -49,7 +53,8 @@ class MyGame(arcade.Window):
         self.player_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
         self.coin_list = arcade.SpriteList()
-        
+        self.coin_sound = arcade.load_sound("collectcoin-6075.mp3")
+        #self.background_music = arcade.load_sound("1. All The World Is Mad.mp3")
         # Set up the player
         self.player_sprite = arcade.Sprite("character.png",
                                            SPRITE_SCALING)
@@ -105,6 +110,10 @@ class MyGame(arcade.Window):
         self.player_list.draw()
         self.coin_list.draw()
 
+        #arcade.play_sound(self.background_music)
+
+        arcade.draw_text(f"Score: {self.score}", 10, 10, arcade.color.BLACK, 12)
+
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
 
@@ -138,6 +147,8 @@ class MyGame(arcade.Window):
 
         for coin in hit_list:
             coin.remove_from_sprite_lists()
+            self.score += 1
+            arcade.play_sound(self.coin_sound)
 
 
 
